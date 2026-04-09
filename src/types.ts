@@ -1,38 +1,16 @@
-type Data = {
+export type Data = {
+  couple: string;
   date: string;
   location: string;
   gretting: string;
-  groom: {
-    name: string;
-    account_number: string;
-    parents: {
-      mother: {
-        name: string;
-        account_number: string;
-      };
-      father: {
-        name: string;
-        account_number: string;
-      };
+  families: {
+    left: {
+      familyName: string;
+      parents: string;
     };
-  };
-  bride: {
-    name: string;
-    account_number: string;
-    parents: {
-      mother: {
-        name: string;
-        account_number: string;
-      };
-      father: {
-        name: string;
-        account_number: string;
-      };
+    right: {
+      familyName: string;
+      parents: string;
     };
-  };
-  kakaotalk: {
-    api_token: string;
-    wedding_invitation_url: string;
-    share_image: string;
   };
 };

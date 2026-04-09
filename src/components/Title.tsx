@@ -1,5 +1,6 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
+import type { Data } from "@/types";
 
 const Layout = styled("div", {
   width: "100%",
@@ -39,8 +40,8 @@ const WeddingInvitation = styled("p", {
   marginBottom: 16,
 });
 
-const GroomBride = styled("p", {
-  fontSize: "3.5vh",
+const Couple = styled("p", {
+  fontSize: "4vh",
   fontWeight: "bold",
   opacity: 0.9,
   marginBottom: 16,
@@ -63,10 +64,8 @@ export default function Title({ data }: TitleProps) {
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>
-        <WeddingInvitation>WEDDING INVITATION</WeddingInvitation>
-        <GroomBride>
-          {data?.groom?.name} &#38; {data?.bride?.name}
-        </GroomBride>
+        <WeddingInvitation>Düğün Davetiyesi</WeddingInvitation>
+        <Couple>{data?.couple}</Couple>
         <Schedule>
           {data?.date}
           <br />

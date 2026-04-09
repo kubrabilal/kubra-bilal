@@ -1,5 +1,6 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
+import type { Data } from "@/types";
 
 const Wrapper = styled("div", {
   background: "#efebe9",
@@ -23,13 +24,34 @@ const Content = styled("div", {
   textAlign: "center",
 });
 
-const GroomBride = styled("p", {
-  fontSize: "1.75vh",
-  lineHeight: 1.75,
-  opacity: 0.85,
-  marginBottom: 0,
+const FamiliesContainer = styled("div", {
+  display: "flex",
+  justifyContent: "space-around",
   width: "100%",
+  marginTop: 32,
+  marginBottom: 16,
+  paddingBottom: 16,
+});
+
+const FamilySection = styled("div", {
+  flex: 1,
   textAlign: "center",
+  opacity: 0.85,
+});
+
+const FamilyName = styled("p", {
+  fontSize: "1.5vh",
+  fontWeight: "bold",
+  opacity: 0.85,
+  marginBottom: 8,
+  margin: 0,
+});
+
+const FamilyParents = styled("p", {
+  fontSize: "1.25vh",
+  opacity: 0.75,
+  marginBottom: 0,
+  margin: 0,
 });
 
 type GrettingProps = {
@@ -40,7 +62,7 @@ export default function Gretting({ data }: GrettingProps) {
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
-        <Title>결혼합니다</Title>
+        <Title>Uygun bişeyler yazılacak</Title>
       </Divider>
       <Content>
         {data?.gretting?.split("\n")?.map((value, index) => {
@@ -52,13 +74,16 @@ export default function Gretting({ data }: GrettingProps) {
           );
         })}
       </Content>
-      <GroomBride>
-        {data?.groom?.parents?.father?.name} ·{" "}
-        {data?.groom?.parents?.mother?.name}의 장남 {data?.groom?.name}
-        <br />
-        {data?.bride?.parents?.father?.name} ·{" "}
-        {data?.bride?.parents?.mother?.name}의 장녀 {data?.bride?.name}
-      </GroomBride>
+      <FamiliesContainer>
+        <FamilySection>
+          <FamilyName>{data?.families?.left?.familyName}</FamilyName>
+          <FamilyParents>{data?.families?.left?.parents}</FamilyParents>
+        </FamilySection>
+        <FamilySection>
+          <FamilyName>{data?.families?.right?.familyName}</FamilyName>
+          <FamilyParents>{data?.families?.right?.parents}</FamilyParents>
+        </FamilySection>
+      </FamiliesContainer>
     </Wrapper>
   );
 }

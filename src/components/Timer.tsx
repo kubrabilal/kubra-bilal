@@ -1,0 +1,94 @@
+import { useState, useEffect } from "react";
+import { styled } from "@stitches/react";
+
+const TimerWrapper = styled("div", {
+  background: "#efebe9",
+  backgroundImage: "url(./assets/GroovePaper.png)",
+  width: "100%",
+  padding: "40px 0",
+  textAlign: "center",
+});
+
+const TimeUnit = styled("div", {
+  display: "inline-block",
+  margin: "0 10px",
+  textAlign: "center",
+});
+
+const Number = styled("div", {
+  fontSize: "3.5vh",
+  fontWeight: "bold",
+  color: "#d4af37", // Matching your map button gold
+});
+
+const Label = styled("div", {
+  fontSize: "1.2vh",
+  textTransform: "uppercase",
+  letterSpacing: "1px",
+  color: "#777",
+});
+
+export default function WeddingTimer() {
+  const [timeLeft, setTimeLeft] = useState({
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    // Setting target to July 26, 2026 at 19:00
+    const targetDate = new Date("2026-07-26T19:00:00").getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        // Calculations for months (approximate), days, hours, mins, secs
+        const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        setTimeLeft({ months, days, hours, minutes, seconds });
+      } else {
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <TimerWrapper>
+      <div style={{ marginBottom: '20px', fontSize: '1.8vh', color: '#555', fontStyle: 'italic' }}>
+        Counting down to our big day...
+      </div>
+      <div>
+        <TimeUnit>
+          <Number>{timeLeft.months}</Number>
+          <Label>Months</Label>
+        </TimeUnit>
+        <TimeUnit>
+          <Number>{timeLeft.days}</Number>
+          <Label>Days</Label>
+        </TimeUnit>
+        <TimeUnit>
+          <Number>{timeLeft.hours}</Number>
+          <Label>Hours</Label>
+        </TimeUnit>
+        <TimeUnit>
+          <Number>{timeLeft.minutes}</Number>
+          <Label>Mins</Label>
+        </TimeUnit>
+        <TimeUnit>
+          <Number>{timeLeft.seconds}</Number>
+          <Label>Secs</Label>
+        </TimeUnit>
+      </div>
+    </TimerWrapper>
+  );
+}

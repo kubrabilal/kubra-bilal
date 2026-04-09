@@ -51,7 +51,7 @@ export default function Home() {
         />
         <meta
           property="og:url"
-          content="https://kyuhyuk.kr/wedding-invitation"
+          content="https://kubrabilal.github.io/kubra-bilal/"
         />
         <meta name="theme-color" content="#BCAAA4" />
         <title>Kübra & Bilal 26.07.2026</title>

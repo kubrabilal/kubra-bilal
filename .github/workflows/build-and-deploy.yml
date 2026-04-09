@@ -4,21 +4,26 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-        with:
-          persist-credentials: false
 
-      - name: Install and Build
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20.10.0
-      - run: npm install
-      - run: npm run build
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build with Next.js
+        run: npm run export
         env:
           CI: true
 

@@ -41,14 +41,14 @@ const WeddingInvitation = styled("p", {
 });
 
 const Couple = styled("p", {
-  fontSize: "4vh",
+  fontSize: "6vh",
   fontWeight: "bold",
   opacity: 0.9,
   marginBottom: 16,
 });
 
 const Schedule = styled("p", {
-  fontSize: "2vh",
+  fontSize: "2.5vh",
   opacity: 0.65,
   marginBottom: 24,
 });
@@ -64,10 +64,11 @@ export default function Title({ data }: TitleProps) {
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>
-        <WeddingInvitation>Düğün Davetiyesi</WeddingInvitation>
         <Couple>{data?.couple}</Couple>
         <Schedule>
           {data?.date}
+          <br />
+          {data?.time}
           <br />
           {data?.location}
         </Schedule>

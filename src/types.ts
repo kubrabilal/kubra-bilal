@@ -1,6 +1,7 @@
 export type Data = {
   couple: string;
   date: string;
+  time: string;
   location: string;
   gretting: string;
   families: {

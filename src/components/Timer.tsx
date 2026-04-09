@@ -65,28 +65,28 @@ export default function WeddingTimer() {
   return (
     <TimerWrapper>
       <div style={{ marginBottom: '20px', fontSize: '1.8vh', color: '#555', fontStyle: 'italic' }}>
-        Counting down to our big day...
+        Düğünümüze kalan süre...
       </div>
       <div>
         <TimeUnit>
           <Number>{timeLeft.months}</Number>
-          <Label>Months</Label>
+          <Label>Ay</Label>
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.days}</Number>
-          <Label>Days</Label>
+          <Label>Gün</Label>
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.hours}</Number>
-          <Label>Hours</Label>
+          <Label>Saat</Label>
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.minutes}</Number>
-          <Label>Mins</Label>
+          <Label>Dakika</Label>
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.seconds}</Number>
-          <Label>Secs</Label>
+          <Label>Saniye</Label>
         </TimeUnit>
       </div>
     </TimerWrapper>

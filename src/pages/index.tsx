@@ -6,33 +6,25 @@ import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
 import Script from "next/script";
 
+// 1. Import the Envelope component
+const Envelope = dynamic(() => import("@/components/Envelope"), { ssr: false });
+
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
 const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
 const Location = dynamic(() => import("@/components/Location"), { ssr: false });
-const WeddingTimer = dynamic(() => import("@/components/Timer"));
+const WeddingTimer = dynamic(() => import("@/components/Timer"), { ssr: false });
+
 const notoSansKR = Noto_Sans_KR({
   weight: ["400", "700"],
   subsets: [],
   style: "normal",
 });
 
-const Footer = styled("footer", {
-  background: "#D7CCC8",
-  backgroundImage: "url(./assets/GroovePaper.png)",
-  opacity: 0.6,
-  textAlign: "center",
-  width: "100%",
-  height: "100px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-  "-webkit-box-align": "center",
-  "-webkit-box-pack": "center",
-});
-
 export default function Home() {
+  // 2. Add a 'state' to track if the envelope has been opened
+  const [invitationVisible, setInvitationVisible] = useState(false);
+
   return (
     <>
       <Head>
@@ -41,23 +33,41 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta content="Kübra & Bilal 26.07.2026" name="Title" />
         <meta
-          content="Kübra & Bilal Wedding Invitation - July 26, 2026"
+          content="Kübra & Bilal Düğün Davetiyesi - 26 Temmuz 2026"
           name="Description"
         />
-        <meta content="Kübra & Bilal Wedding Invitation - July 26, 2026" name="Keyword" />
+        <meta content="Kübra & Bilal Düğün Davetiyesi - 26 Temmuz 2026" name="Keyword" />
         <meta property="og:title" content="Kübra & Bilal 26.07.2026" />
         <meta
           property="og:description"
-          content="Kübra & Bilal Wedding Invitation - July 26, 2026"
+          content="Kübra & Bilal Düğün Davetiyesi - 26 Temmuz 2026"
         />
         <meta
           property="og:url"
           content="https://kubrabilal.github.io/kubra-bilal/"
         />
+        <meta
+          property="og:image"
+          content="https://kubrabilal.github.io/kubra-bilal/assets/og-image.jpg"
+        />
         <meta name="theme-color" content="#BCAAA4" />
         <title>Kübra & Bilal 26.07.2026</title>
       </Head>
-      <main className={`${notoSansKR.className}`}>
+
+      {/* 3. Show the Envelope overlay first */}
+      <Envelope onOpen={() => setInvitationVisible(true)} />
+
+      {/* 4. The main content now has a transition effect */}
+      <main 
+        className={`${notoSansKR.className}`}
+        style={{ 
+          opacity: invitationVisible ? 1 : 0, 
+          transition: 'opacity 1.5s ease-in-out',
+          visibility: invitationVisible ? 'visible' : 'hidden',
+          overflow: 'hidden',
+          minHeight: '100vh',
+        }}
+      >
         <Title data={JsonData} />
         <Gretting data={JsonData} />
         <Gallery />

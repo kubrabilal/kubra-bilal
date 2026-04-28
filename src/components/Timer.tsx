@@ -27,6 +27,7 @@ const Label = styled("div", {
   letterSpacing: "1.2px",
   color: "#777",
   fontWeight: "700",
+  fontFamily: "'Montserrat', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 });
 
 export default function WeddingTimer() {

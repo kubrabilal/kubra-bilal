@@ -45,6 +45,8 @@ const FamilyName = styled("p", {
   opacity: 0.85,
   marginBottom: 8,
   margin: 0,
+  fontFamily: "'Montserrat', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+  letterSpacing: "0.03em",
 });
 
 const FamilyParents = styled("p", {

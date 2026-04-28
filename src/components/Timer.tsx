@@ -68,7 +68,7 @@ export default function WeddingTimer() {
       <div
         style={{
           marginBottom: "20px",
-          fontSize: "2.55vh",
+          fontSize: "2.95vh",
           color: "#555",
           fontStyle: "italic",
           fontWeight: 700,

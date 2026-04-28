@@ -4,7 +4,6 @@ import type { Data } from "@/types";
 
 const Wrapper = styled("div", {
   backgroundColor: "#f6efe4",
-  backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
   fontFamily: "'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 });
@@ -41,7 +40,7 @@ const FamilySection = styled("div", {
 });
 
 const FamilyName = styled("p", {
-  fontSize: "2.15vh",
+  fontSize: "2.45vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 8,
@@ -49,7 +48,7 @@ const FamilyName = styled("p", {
 });
 
 const FamilyParents = styled("p", {
-  fontSize: "1.85vh",
+  fontSize: "2.1vh",
   opacity: 0.75,
   marginBottom: 0,
   margin: 0,

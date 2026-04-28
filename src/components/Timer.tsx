@@ -3,8 +3,8 @@ import { styled } from "@stitches/react";
 
 const TimerWrapper = styled("div", {
   backgroundColor: "#f6efe4",
-  backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
+  marginTop: "-1px",
   padding: "40px 0",
   textAlign: "center",
 });

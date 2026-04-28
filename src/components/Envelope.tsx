@@ -1,15 +1,5 @@
 import { useState } from "react";
-import { styled, keyframes } from "@stitches/react";
-
-const openFlap = keyframes({
-  "0%": { transform: "rotateX(0deg)", zIndex: 5 },
-  "100%": { transform: "rotateX(180deg)", zIndex: 1 },
-});
-
-const slideUp = keyframes({
-  "0%": { transform: "translateY(0)" },
-  "100%": { transform: "translateY(-100%)", opacity: 0 },
-});
+import { styled } from "@stitches/react";
 
 const Overlay = styled("div", {
   position: "fixed",
@@ -17,11 +7,11 @@ const Overlay = styled("div", {
   left: 0,
   width: "100%",
   height: "100%",
-  backgroundColor: "#fdfbfb",
+  backgroundColor: "#f5f5f0",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  zIndex: 9999, // Stays on top of everything
+  zIndex: 9999,
   transition: "all 0.8s ease",
   variants: {
     isOpen: {
@@ -32,49 +22,47 @@ const Overlay = styled("div", {
 
 const EnvelopeContainer = styled("div", {
   position: "relative",
-  width: "500px",
-  height: "350px",
-  backgroundColor: "#d4a574",
+  width: "100vw",
+  height: "100vh",
+  backgroundColor: "#c9d9c3",
+  backgroundImage: `
+    radial-gradient(circle at 15% 20%, rgba(150, 170, 130, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 85% 75%, rgba(150, 170, 130, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 25% 80%, rgba(150, 170, 130, 0.3) 2px, transparent 3px),
+    radial-gradient(circle at 70% 15%, rgba(150, 170, 130, 0.3) 2px, transparent 3px),
+    linear-gradient(135deg, rgba(180, 195, 170, 0.15) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(150, 170, 130, 0.08) 0%, transparent 100%)
+  `,
   cursor: "pointer",
-  boxShadow: "0 15px 40px rgba(0,0,0,0.15)",
+  boxShadow: "inset 0 0 60px rgba(0,0,0,0.08)",
   perspective: "1200px",
-  "@media (max-width: 768px)": {
-    width: "400px",
-    height: "280px",
-  },
-  "@media (max-width: 480px)": {
-    width: "300px",
-    height: "210px",
-  },
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
 });
 
 const Flap = styled("div", {
-  position: "absolute",
-  top: 0,
+  position: "fixed",
+  top: "-50vh",
   left: "50%",
   transform: "translateX(-50%)",
-  width: 0,
-  height: 0,
-  borderLeft: "250px solid transparent",
-  borderRight: "250px solid transparent",
-  borderTop: "175px solid #c49564",
+  width: "100vw",
+  height: "50vh",
+  backgroundColor: "#b8d4a8",
+  backgroundImage: `
+    radial-gradient(circle at 20% 30%, rgba(150, 170, 130, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 80% 60%, rgba(150, 170, 130, 0.4) 2px, transparent 3px),
+    linear-gradient(135deg, rgba(180, 195, 170, 0.2) 0%, transparent 50%)
+  `,
   transformOrigin: "top center",
-  transition: "transform 0.6s ease",
+  transition: "transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
   zIndex: 5,
+  boxShadow: "0 10px 40px rgba(0,0,0,0.2)",
   variants: {
     animate: {
       true: { transform: "translateX(-50%) rotateX(180deg)", zIndex: 0 },
     },
-  },
-  "@media (max-width: 768px)": {
-    borderLeft: "200px solid transparent",
-    borderRight: "200px solid transparent",
-    borderTop: "140px solid #c49564",
-  },
-  "@media (max-width: 480px)": {
-    borderLeft: "150px solid transparent",
-    borderRight: "150px solid transparent",
-    borderTop: "105px solid #c49564",
   },
 });
 
@@ -84,17 +72,9 @@ const LeftFlap = styled("div", {
   left: 0,
   width: 0,
   height: 0,
-  borderLeft: "250px solid #b8935a",
-  borderBottom: "175px solid transparent",
+  borderLeft: "50vw solid #a8c999",
+  borderBottom: "50vh solid transparent",
   zIndex: 0,
-  "@media (max-width: 768px)": {
-    borderLeft: "200px solid #b8935a",
-    borderBottom: "140px solid transparent",
-  },
-  "@media (max-width: 480px)": {
-    borderLeft: "150px solid #b8935a",
-    borderBottom: "105px solid transparent",
-  },
 });
 
 const RightFlap = styled("div", {
@@ -103,43 +83,47 @@ const RightFlap = styled("div", {
   right: 0,
   width: 0,
   height: 0,
-  borderRight: "250px solid #b8935a",
-  borderBottom: "175px solid transparent",
+  borderRight: "50vw solid #a8c999",
+  borderBottom: "50vh solid transparent",
   zIndex: 0,
-  "@media (max-width: 768px)": {
-    borderRight: "200px solid #b8935a",
-    borderBottom: "140px solid transparent",
-  },
-  "@media (max-width: 480px)": {
-    borderRight: "150px solid #b8935a",
-    borderBottom: "105px solid transparent",
-  },
 });
 
 const Letter = styled("div", {
-    position: "absolute",
-    bottom: "20px",
-    left: "20px",
-    right: "20px",
-    width: "auto",
-    height: "auto",
-    backgroundColor: "transparent",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    fontSize: "32px",
-    fontWeight: "500",
-    color: "#5a4a3a",
-    zIndex: 1,
-    "@media (max-width: 768px)": {
-      fontSize: "24px",
-      bottom: "16px",
-    },
-    "@media (max-width: 480px)": {
-      fontSize: "18px",
-      bottom: "12px",
-    },
+  position: "absolute",
+  bottom: "15vh",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "min(90vw, 520px)",
+  padding: "0 1.5rem",
+  backgroundColor: "transparent",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  fontSize: "clamp(1rem, 3vw, 2.5rem)",
+  fontStyle: "italic",
+  fontWeight: "300",
+  color: "#7a8c70",
+  zIndex: 1,
+  opacity: 0.9,
+  lineHeight: 1.4,
+});
+
+const LetterMessage = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.35rem",
+});
+
+const WelcomeText = styled("p", {
+  margin: 0,
+  fontSize: "clamp(1.2rem, 3.2vw, 2.7rem)",
+});
+
+const PromptText = styled("p", {
+  margin: 0,
+  fontSize: "clamp(0.95rem, 2vw, 1.5rem)",
+  letterSpacing: "0.04em",
 });
 
 const WaxSeal = styled("div", {
@@ -147,31 +131,22 @@ const WaxSeal = styled("div", {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "120px",
-  height: "120px",
+  width: "clamp(80px, 12vw, 140px)",
+  height: "clamp(80px, 12vw, 140px)",
   borderRadius: "50%",
-  background: "radial-gradient(circle at 30% 30%, #ffd700, #ffed4e, #daa520)",
-  boxShadow: "0 8px 15px rgba(0,0,0,0.25), inset -3px -3px 8px rgba(0,0,0,0.15)",
+  background: "radial-gradient(circle at 35% 35%, #f5f1e8, #e8ddd0, #d4c9b9)",
+  boxShadow: "0 12px 25px rgba(0,0,0,0.2), inset -4px -4px 10px rgba(0,0,0,0.1), inset 2px 2px 5px rgba(255,255,255,0.5)",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  fontSize: "36px",
-  fontWeight: "bold",
-  color: "#8b4513",
+  fontSize: "clamp(1.5rem, 4vw, 3.5rem)",
+  fontWeight: "700",
+  letterSpacing: "0.15em",
+  color: "#a8c999",
   zIndex: 10,
   transition: "transform 0.3s ease",
   "&:hover": {
-    transform: "translate(-50%, -50%) scale(1.08)",
-  },
-  "@media (max-width: 768px)": {
-    width: "100px",
-    height: "100px",
-    fontSize: "28px",
-  },
-  "@media (max-width: 480px)": {
-    width: "80px",
-    height: "80px",
-    fontSize: "22px",
+    transform: "translate(-50%, -50%) scale(1.1)",
   },
 });
 
@@ -183,7 +158,7 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
     // Wait for animation to finish before removing overlay
     setTimeout(() => {
       onOpen();
-    }, 1000);
+    }, 1200);
   };
 
   return (
@@ -192,12 +167,13 @@ export default function Envelope({ onOpen }: { onOpen: () => void }) {
         <LeftFlap />
         <RightFlap />
         <Flap animate={isOpen} />
-        <Letter>
-            <div>
-                <p>Açmak için dokunun</p>
-            </div>
-        </Letter>
         <WaxSeal>K&B</WaxSeal>
+        <Letter>
+          <LetterMessage>
+            <WelcomeText>Hos geldiniz</WelcomeText>
+            <PromptText>Daveti acmak icin dokunun</PromptText>
+          </LetterMessage>
+        </Letter>
       </EnvelopeContainer>
     </Overlay>
   );

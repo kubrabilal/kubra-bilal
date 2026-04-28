@@ -1,12 +1,9 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { Noto_Sans_KR } from "next/font/google";
+import { useState } from "react";
+import { Cormorant_Garamond } from "next/font/google";
 import dynamic from "next/dynamic";
-import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
-import Script from "next/script";
 
-// 1. Import the Envelope component
 const Envelope = dynamic(() => import("@/components/Envelope"), { ssr: false });
 
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
@@ -15,14 +12,13 @@ const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
 const Location = dynamic(() => import("@/components/Location"), { ssr: false });
 const WeddingTimer = dynamic(() => import("@/components/Timer"), { ssr: false });
 
-const notoSansKR = Noto_Sans_KR({
+const cormorantGaramond = Cormorant_Garamond({
   weight: ["400", "700"],
-  subsets: [],
+  subsets: ["latin"],
   style: "normal",
 });
 
 export default function Home() {
-  // 2. Add a 'state' to track if the envelope has been opened
   const [invitationVisible, setInvitationVisible] = useState(false);
 
   return (
@@ -54,18 +50,17 @@ export default function Home() {
         <title>Kübra & Bilal 26.07.2026</title>
       </Head>
 
-      {/* 3. Show the Envelope overlay first */}
       <Envelope onOpen={() => setInvitationVisible(true)} />
 
-      {/* 4. The main content now has a transition effect */}
-      <main 
-        className={`${notoSansKR.className}`}
-        style={{ 
-          opacity: invitationVisible ? 1 : 0, 
-          transition: 'opacity 1.5s ease-in-out',
-          visibility: invitationVisible ? 'visible' : 'hidden',
-          overflow: 'hidden',
-          minHeight: '100vh',
+      <main
+        className={cormorantGaramond.className}
+        style={{
+          opacity: invitationVisible ? 1 : 0,
+          transition: "opacity 1.5s ease-in-out",
+          visibility: invitationVisible ? "visible" : "hidden",
+          height: invitationVisible ? "auto" : "100vh",
+          overflow: invitationVisible ? "visible" : "hidden",
+          minHeight: "100vh",
         }}
       >
         <Title data={JsonData} />

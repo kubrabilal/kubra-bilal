@@ -5,7 +5,7 @@ const TimerWrapper = styled("div", {
   backgroundColor: "#f6efe4",
   width: "100%",
   marginTop: "-1px",
-  padding: "40px 0",
+  padding: "52px 0",
   textAlign: "center",
 });
 
@@ -16,13 +16,13 @@ const TimeUnit = styled("div", {
 });
 
 const Number = styled("div", {
-  fontSize: "3.9vh",
+  fontSize: "4.5vh",
   fontWeight: "bold",
   color: "#d4af37", // Matching your map button gold
 });
 
 const Label = styled("div", {
-  fontSize: "1.7vh",
+  fontSize: "2vh",
   textTransform: "uppercase",
   letterSpacing: "1.2px",
   color: "#777",
@@ -68,8 +68,8 @@ export default function WeddingTimer() {
     <TimerWrapper>
       <div
         style={{
-          marginBottom: "20px",
-          fontSize: "2.95vh",
+          marginBottom: "26px",
+          fontSize: "3.8vh",
           color: "#555",
           fontStyle: "italic",
           fontWeight: 700,

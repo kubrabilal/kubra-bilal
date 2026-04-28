@@ -10,7 +10,7 @@ const Wrapper = styled("div", {
 });
 
 const Title = styled("p", {
-  fontSize: "2.3vh",
+  fontSize: "2.6vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 0,
@@ -47,7 +47,7 @@ export default function Gallery() {
   return (
     <Wrapper>
       <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
-        <Title>Fotograflarimiz</Title>
+        <Title>Fotoğraflarımız</Title>
       </Divider>
       <ImageGallery
         showPlayButton={false}

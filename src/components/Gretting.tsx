@@ -40,7 +40,7 @@ const FamilySection = styled("div", {
 });
 
 const FamilyName = styled("p", {
-  fontSize: "2.45vh",
+  fontSize: "2.7vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 8,
@@ -48,7 +48,7 @@ const FamilyName = styled("p", {
 });
 
 const FamilyParents = styled("p", {
-  fontSize: "2.1vh",
+  fontSize: "2.3vh",
   opacity: 0.75,
   marginBottom: 0,
   margin: 0,

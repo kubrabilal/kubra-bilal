@@ -4,7 +4,7 @@ import { styled } from "@stitches/react";
 import "react-image-gallery/styles/css/image-gallery.css";
 
 const Wrapper = styled("div", {
-  background: "#efebe9",
+  background: "#f7f1e7",
   backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
 });

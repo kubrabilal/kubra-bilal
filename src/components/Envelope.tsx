@@ -70,6 +70,19 @@ const IntroVideo = styled("video", {
   backgroundColor: "#000",
 });
 
+const WhiteTransition = styled("div", {
+  position: "absolute",
+  inset: 0,
+  backgroundColor: "#fff",
+  pointerEvents: "none",
+  animation: "whitefade 260ms ease-out forwards",
+  "@keyframes whitefade": {
+    "0%": { opacity: 0 },
+    "35%": { opacity: 0.75 },
+    "100%": { opacity: 0 },
+  },
+});
+
 type EnvelopeProps = {
   onOpen: () => void;
   onInteract?: () => void;
@@ -84,8 +97,10 @@ export default function Envelope({
   const [phase, setPhase] = useState<Phase>("cover");
   const [introReady, setIntroReady] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const [showWhiteTransition, setShowWhiteTransition] = useState(false);
   const introRef = useRef<HTMLVideoElement | null>(null);
   const didInteractRef = useRef(false);
+  const [allowStart, setAllowStart] = useState(false);
   const fullyReady = introReady && backgroundReady;
 
   const handleFirstInteraction = () => {
@@ -95,10 +110,24 @@ export default function Envelope({
   };
 
   const startIntro = () => {
-    if (!fullyReady) return;
+    if (!allowStart) return;
     handleFirstInteraction();
     setPhase("intro");
   };
+
+  useEffect(() => {
+    if (fullyReady) {
+      setAllowStart(true);
+      return;
+    }
+
+    // iOS Safari can miss canplaythrough; do not block forever.
+    const timer = window.setTimeout(() => {
+      setAllowStart(true);
+    }, 2200);
+
+    return () => window.clearTimeout(timer);
+  }, [fullyReady]);
 
   useEffect(() => {
     if (phase !== "intro") return;
@@ -117,8 +146,11 @@ export default function Envelope({
 
   const finish = () => {
     setPhase("exit");
-    setIsDone(true);
-    onOpen();
+    setShowWhiteTransition(true);
+    window.setTimeout(() => {
+      setIsDone(true);
+      onOpen();
+    }, 170);
   };
 
   if (isDone) {
@@ -130,9 +162,9 @@ export default function Envelope({
       {phase === "cover" && (
         <Cover type="button" onClick={startIntro} aria-label="Daveti aç">
           <CoverShade />
-          <TapText disabled={!fullyReady}>
+          <TapText disabled={!allowStart}>
             Mektubu açmak için dokunun
-            {!fullyReady ? " (Yukleniyor...)" : ""}
+            {!allowStart ? " (Yukleniyor...)" : ""}
           </TapText>
         </Cover>
       )}
@@ -148,6 +180,8 @@ export default function Envelope({
       >
         <source src="./assets/giris.mp4" type="video/mp4" />
       </IntroVideo>
+
+      {showWhiteTransition && <WhiteTransition />}
 
     </Overlay>
   );

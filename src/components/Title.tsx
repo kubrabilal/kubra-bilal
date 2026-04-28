@@ -49,18 +49,6 @@ const Schedule = styled("p", {
   marginBottom: 24,
 });
 
-const ScrollHint = styled("div", {
-  position: "absolute",
-  left: "50%",
-  bottom: 18,
-  transform: "translateX(-50%)",
-  color: "rgba(255,255,255,0.8)",
-  fontSize: "1.5vh",
-  letterSpacing: "0.1em",
-  textTransform: "uppercase",
-  userSelect: "none",
-});
-
 type TitleProps = {
   data?: Data;
   playVideo?: boolean;
@@ -73,6 +61,7 @@ export default function Title({
   onVideoReady,
 }: TitleProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const readyFiredRef = useRef(false);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -91,6 +80,12 @@ export default function Title({
     void el.play();
   }, [playVideo]);
 
+  const markReady = () => {
+    if (readyFiredRef.current) return;
+    readyFiredRef.current = true;
+    onVideoReady?.();
+  };
+
   return (
     <Layout>
       <VideoBackground
@@ -99,7 +94,9 @@ export default function Title({
         muted
         playsInline={true}
         preload="auto"
-        onCanPlayThrough={onVideoReady}
+        onCanPlay={markReady}
+        onLoadedData={markReady}
+        onCanPlayThrough={markReady}
       >
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>
@@ -113,7 +110,6 @@ export default function Title({
           {data?.location}
         </Schedule>
       </TitleWrapper>
-      <ScrollHint>Asagi kaydirin</ScrollHint>
     </Layout>
   );
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { styled } from "@stitches/react";
 
 const TimerWrapper = styled("div", {
-  background: "#efebe9",
+  background: "#f7f1e7",
   backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
   padding: "40px 0",
@@ -64,7 +64,7 @@ export default function WeddingTimer() {
 
   return (
     <TimerWrapper>
-      <div style={{ marginBottom: '20px', fontSize: '2.05vh', color: '#555', fontStyle: 'italic' }}>
+      <div style={{ marginBottom: '20px', fontSize: '2.55vh', color: '#555', fontStyle: 'italic' }}>
         Düğünümüze kalan süre...
       </div>
       <div>

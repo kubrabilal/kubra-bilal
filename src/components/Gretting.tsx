@@ -3,20 +3,20 @@ import { Divider } from "antd";
 import type { Data } from "@/types";
 
 const Wrapper = styled("div", {
-  background: "#efebe9",
+  background: "#f7f1e7",
   backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
 });
 
 const Title = styled("p", {
-  fontSize: "2.3vh",
+  fontSize: "2.8vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 0,
 });
 
 const Content = styled("div", {
-  fontSize: "1.95vh",
+  fontSize: "2.25vh",
   lineHeight: 1.75,
   opacity: 0.75,
   marginBottom: 16,

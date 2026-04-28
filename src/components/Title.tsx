@@ -1,6 +1,6 @@
 import { styled } from "@stitches/react";
-import { Divider } from "antd";
 import type { Data } from "@/types";
+import { useEffect, useRef } from "react";
 
 const Layout = styled("div", {
   width: "100%",
@@ -55,12 +55,40 @@ const Schedule = styled("p", {
 
 type TitleProps = {
   data?: Data;
+  playVideo?: boolean;
 };
 
-export default function Title({ data }: TitleProps) {
+export default function Title({ data, playVideo = true }: TitleProps) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    if (!playVideo) {
+      el.pause();
+      return;
+    }
+
+    // Start from the beginning for a consistent handoff from the intro video.
+    try {
+      el.currentTime = 0;
+    } catch {
+      // ignore
+    }
+    void el.play();
+  }, [playVideo]);
+
   return (
     <Layout>
-      <VideoBackground autoPlay loop muted playsInline={true}>
+      <VideoBackground
+        ref={videoRef}
+        loop
+        muted
+        playsInline={true}
+        preload="auto"
+        // We start playback via `playVideo` to align with the intro flow.
+      >
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>

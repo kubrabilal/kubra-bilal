@@ -11,6 +11,9 @@ const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
 const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
 const Location = dynamic(() => import("@/components/Location"), { ssr: false });
 const WeddingTimer = dynamic(() => import("@/components/Timer"), { ssr: false });
+const BackgroundMusic = dynamic(() => import("@/components/BackgroundMusic"), {
+  ssr: false,
+});
 
 const cormorantGaramond = Cormorant_Garamond({
   weight: ["400", "700"],
@@ -20,6 +23,7 @@ const cormorantGaramond = Cormorant_Garamond({
 
 export default function Home() {
   const [invitationVisible, setInvitationVisible] = useState(false);
+  const [mediaEnabled, setMediaEnabled] = useState(false);
 
   return (
     <>
@@ -50,20 +54,23 @@ export default function Home() {
         <title>Kübra & Bilal 26.07.2026</title>
       </Head>
 
-      <Envelope onOpen={() => setInvitationVisible(true)} />
+      <Envelope
+        onInteract={() => setMediaEnabled(true)}
+        onOpen={() => setInvitationVisible(true)}
+      />
+
+      <BackgroundMusic enabled={mediaEnabled} />
 
       <main
         className={cormorantGaramond.className}
         style={{
           opacity: invitationVisible ? 1 : 0,
           transition: "opacity 1.5s ease-in-out",
-          visibility: invitationVisible ? "visible" : "hidden",
-          height: invitationVisible ? "auto" : "100vh",
-          overflow: invitationVisible ? "visible" : "hidden",
+          pointerEvents: invitationVisible ? "auto" : "none",
           minHeight: "100vh",
         }}
       >
-        <Title data={JsonData} />
+        <Title data={JsonData} playVideo={mediaEnabled} />
         <Gretting data={JsonData} />
         <Gallery />
         <Location />

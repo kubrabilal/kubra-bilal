@@ -1,5 +1,6 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
+import { Cormorant_Garamond } from "next/font/google";
 import type { Data } from "@/types";
 
 const Wrapper = styled("div", {
@@ -56,6 +57,12 @@ const FamilyParents = styled("p", {
   margin: 0,
 });
 
+const cormorantGaramond = Cormorant_Garamond({
+  weight: ["500", "700"],
+  subsets: ["latin"],
+  style: "normal",
+});
+
 type GrettingProps = {
   data?: Data;
 };
@@ -78,11 +85,15 @@ export default function Gretting({ data }: GrettingProps) {
       </Content>
       <FamiliesContainer>
         <FamilySection>
-          <FamilyName>{data?.families?.left?.familyName}</FamilyName>
+          <FamilyName className={cormorantGaramond.className}>
+            {data?.families?.left?.familyName}
+          </FamilyName>
           <FamilyParents>{data?.families?.left?.parents}</FamilyParents>
         </FamilySection>
         <FamilySection>
-          <FamilyName>{data?.families?.right?.familyName}</FamilyName>
+          <FamilyName className={cormorantGaramond.className}>
+            {data?.families?.right?.familyName}
+          </FamilyName>
           <FamilyParents>{data?.families?.right?.parents}</FamilyParents>
         </FamilySection>
       </FamiliesContainer>

@@ -7,11 +7,12 @@ const Wrapper = styled("div", {
   width: "100%",
   paddingBottom: 42,
   textAlign: "center",
+  fontFamily: "'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 });
 
 const Title = styled("p", {
-  fontSize: "2.3vh",
-  fontWeight: "bold",
+  fontSize: "2.8vh",
+  fontWeight: 700,
   opacity: 0.85,
   marginBottom: 0,
 });
@@ -49,10 +50,10 @@ export default function Location() {
 
       <div style={{ marginTop: "15px" }}>
         {/* 2. UPDATE THESE DETAILS for your Konya venue */}
-        <p style={{ fontSize: "2.1vh", fontWeight: "600", color: "#444", marginBottom: "4px" }}>
+        <p style={{ fontSize: "2.5vh", fontWeight: 700, color: "#444", marginBottom: "4px" }}>
           Tektaş Düğün Salonu
         </p>
-        <p style={{ fontSize: "1.8vh", color: "#666", marginBottom: "22px" }}>
+        <p style={{ fontSize: "2.1vh", fontWeight: 700, color: "#666", marginBottom: "22px" }}>
           Karatay, Konya, Türkiye
         </p>
         
@@ -65,8 +66,10 @@ export default function Location() {
             background: "#d4af37", 
             borderColor: "#d4af37",
             borderRadius: "4px",
-            height: "45px",
-            padding: "0 30px"
+            height: "50px",
+            padding: "0 34px",
+            fontWeight: 700,
+            fontSize: "1rem"
           }}
         >
           Konumu Google Haritalar&apos;da Aç

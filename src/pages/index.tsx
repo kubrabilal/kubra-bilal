@@ -83,8 +83,8 @@ export default function Home() {
           playVideo={mediaEnabled}
           onVideoReady={() => setBackgroundReady(true)}
         />
-        <Gretting data={JsonData} />
         <WeddingTimer />
+        <Gretting data={JsonData} />
         <Location />
         <Gallery />
       </main>

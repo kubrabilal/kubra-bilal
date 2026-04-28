@@ -26,6 +26,7 @@ const Label = styled("div", {
   textTransform: "uppercase",
   letterSpacing: "1px",
   color: "#777",
+  fontWeight: "700",
 });
 
 export default function WeddingTimer() {
@@ -64,7 +65,15 @@ export default function WeddingTimer() {
 
   return (
     <TimerWrapper>
-      <div style={{ marginBottom: '20px', fontSize: '2.55vh', color: '#555', fontStyle: 'italic' }}>
+      <div
+        style={{
+          marginBottom: "20px",
+          fontSize: "2.55vh",
+          color: "#555",
+          fontStyle: "italic",
+          fontWeight: 700,
+        }}
+      >
         Düğünümüze kalan süre...
       </div>
       <div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { styled } from "@stitches/react";
 
 const TimerWrapper = styled("div", {
-  background: "#f7f1e7",
+  backgroundColor: "#f6efe4",
   backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
   padding: "40px 0",

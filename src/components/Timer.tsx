@@ -22,9 +22,9 @@ const Number = styled("div", {
 });
 
 const Label = styled("div", {
-  fontSize: "1.35vh",
+  fontSize: "1.7vh",
   textTransform: "uppercase",
-  letterSpacing: "1px",
+  letterSpacing: "1.2px",
   color: "#777",
   fontWeight: "700",
 });

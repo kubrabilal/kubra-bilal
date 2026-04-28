@@ -84,9 +84,9 @@ export default function Home() {
           onVideoReady={() => setBackgroundReady(true)}
         />
         <Gretting data={JsonData} />
-        <Gallery />
-        <Location />
         <WeddingTimer />
+        <Location />
+        <Gallery />
       </main>
     </>
   );

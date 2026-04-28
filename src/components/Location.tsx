@@ -10,7 +10,7 @@ const Wrapper = styled("div", {
 });
 
 const Title = styled("p", {
-  fontSize: "2vh",
+  fontSize: "2.3vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 0,
@@ -49,10 +49,10 @@ export default function Location() {
 
       <div style={{ marginTop: "15px" }}>
         {/* 2. UPDATE THESE DETAILS for your Konya venue */}
-        <p style={{ fontSize: "1.9vh", fontWeight: "600", color: "#444", marginBottom: "4px" }}>
+        <p style={{ fontSize: "2.1vh", fontWeight: "600", color: "#444", marginBottom: "4px" }}>
           Tektaş Düğün Salonu
         </p>
-        <p style={{ fontSize: "1.6vh", color: "#666", marginBottom: "22px" }}>
+        <p style={{ fontSize: "1.8vh", color: "#666", marginBottom: "22px" }}>
           Karatay, Konya, Türkiye
         </p>
         

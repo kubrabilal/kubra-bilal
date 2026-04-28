@@ -9,14 +9,14 @@ const Wrapper = styled("div", {
 });
 
 const Title = styled("p", {
-  fontSize: "2vh",
+  fontSize: "2.3vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 0,
 });
 
 const Content = styled("div", {
-  fontSize: "1.75vh",
+  fontSize: "1.95vh",
   lineHeight: 1.75,
   opacity: 0.75,
   marginBottom: 16,
@@ -40,7 +40,7 @@ const FamilySection = styled("div", {
 });
 
 const FamilyName = styled("p", {
-  fontSize: "1.5vh",
+  fontSize: "1.7vh",
   fontWeight: "bold",
   opacity: 0.85,
   marginBottom: 8,
@@ -48,7 +48,7 @@ const FamilyName = styled("p", {
 });
 
 const FamilyParents = styled("p", {
-  fontSize: "1.25vh",
+  fontSize: "1.45vh",
   opacity: 0.75,
   marginBottom: 0,
   margin: 0,
@@ -62,7 +62,7 @@ export default function Gretting({ data }: GrettingProps) {
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
-        <Title>Uygun bişeyler yazılacak</Title>
+        <Title>Davet Mesajı</Title>
       </Divider>
       <Content>
         {data?.gretting?.split("\n")?.map((value, index) => {

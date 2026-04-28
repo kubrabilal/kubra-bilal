@@ -13,7 +13,7 @@ const Layout = styled("div", {
 const TitleWrapper = styled("div", {
   position: "absolute",
   width: "100%",
-  top: "20%",
+  top: "30%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   textAlign: "center",
@@ -37,16 +37,28 @@ const WeddingInvitation = styled("p", {
 });
 
 const Couple = styled("p", {
-  fontSize: "6vh",
+  fontSize: "6.8vh",
   fontWeight: "bold",
   opacity: 0.9,
   marginBottom: 16,
 });
 
 const Schedule = styled("p", {
-  fontSize: "2.5vh",
+  fontSize: "2.9vh",
   opacity: 0.65,
   marginBottom: 24,
+});
+
+const ScrollHint = styled("div", {
+  position: "absolute",
+  left: "50%",
+  bottom: 18,
+  transform: "translateX(-50%)",
+  color: "rgba(255,255,255,0.8)",
+  fontSize: "1.5vh",
+  letterSpacing: "0.1em",
+  textTransform: "uppercase",
+  userSelect: "none",
 });
 
 type TitleProps = {
@@ -101,6 +113,7 @@ export default function Title({
           {data?.location}
         </Schedule>
       </TitleWrapper>
+      <ScrollHint>Asagi kaydirin</ScrollHint>
     </Layout>
   );
 }

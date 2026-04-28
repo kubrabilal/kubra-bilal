@@ -16,13 +16,13 @@ const TimeUnit = styled("div", {
 });
 
 const Number = styled("div", {
-  fontSize: "3.5vh",
+  fontSize: "3.9vh",
   fontWeight: "bold",
   color: "#d4af37", // Matching your map button gold
 });
 
 const Label = styled("div", {
-  fontSize: "1.2vh",
+  fontSize: "1.35vh",
   textTransform: "uppercase",
   letterSpacing: "1px",
   color: "#777",
@@ -64,7 +64,7 @@ export default function WeddingTimer() {
 
   return (
     <TimerWrapper>
-      <div style={{ marginBottom: '20px', fontSize: '1.8vh', color: '#555', fontStyle: 'italic' }}>
+      <div style={{ marginBottom: '20px', fontSize: '2.05vh', color: '#555', fontStyle: 'italic' }}>
         Düğünümüze kalan süre...
       </div>
       <div>

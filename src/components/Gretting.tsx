@@ -3,6 +3,12 @@ import { Divider } from "antd";
 import { Cormorant_Garamond } from "next/font/google";
 import type { Data } from "@/types";
 
+const cormorantGaramond = Cormorant_Garamond({
+  weight: ["500", "700"],
+  subsets: ["latin", "latin-ext"],
+  style: "normal",
+});
+
 const Wrapper = styled("div", {
   backgroundColor: "#f6efe4",
   width: "100%",
@@ -46,6 +52,7 @@ const FamilyName = styled("p", {
   opacity: 0.85,
   marginBottom: 8,
   margin: 0,
+  fontFamily: `${cormorantGaramond.style.fontFamily}, 'Times New Roman', serif`,
   letterSpacing: "0.03em",
 });
 
@@ -54,12 +61,6 @@ const FamilyParents = styled("p", {
   opacity: 0.75,
   marginBottom: 0,
   margin: 0,
-});
-
-const cormorantGaramond = Cormorant_Garamond({
-  weight: ["500", "700"],
-  subsets: ["latin", "latin-ext"],
-  style: "normal",
 });
 
 type GrettingProps = {
@@ -84,15 +85,11 @@ export default function Gretting({ data }: GrettingProps) {
       </Content>
       <FamiliesContainer>
         <FamilySection>
-          <FamilyName className={cormorantGaramond.className}>
-            {data?.families?.left?.familyName}
-          </FamilyName>
+          <FamilyName>{data?.families?.left?.familyName}</FamilyName>
           <FamilyParents>{data?.families?.left?.parents}</FamilyParents>
         </FamilySection>
         <FamilySection>
-          <FamilyName className={cormorantGaramond.className}>
-            {data?.families?.right?.familyName}
-          </FamilyName>
+          <FamilyName>{data?.families?.right?.familyName}</FamilyName>
           <FamilyParents>{data?.families?.right?.parents}</FamilyParents>
         </FamilySection>
       </FamiliesContainer>

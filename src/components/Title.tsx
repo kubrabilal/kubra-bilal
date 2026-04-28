@@ -18,10 +18,6 @@ const TitleWrapper = styled("div", {
   transform: "translate(-50%, -50%)",
   textAlign: "center",
   textShadow: "-1px 0 #9e9e9e, 0 1px #9e9e9e, 1px 0 #9e9e9e, 0 -1px #9e9e9e",
-  animation: "fadein 3s",
-  "-moz-animation": "fadein 3s" /* Firefox */,
-  "-webkit-animation": "fadein 3s" /* Safari and Chrome */,
-  "-o-animation": "fadein 3s" /* Opera */,
 });
 
 const VideoBackground = styled("video", {
@@ -56,9 +52,14 @@ const Schedule = styled("p", {
 type TitleProps = {
   data?: Data;
   playVideo?: boolean;
+  onVideoReady?: () => void;
 };
 
-export default function Title({ data, playVideo = true }: TitleProps) {
+export default function Title({
+  data,
+  playVideo = true,
+  onVideoReady,
+}: TitleProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -70,7 +71,6 @@ export default function Title({ data, playVideo = true }: TitleProps) {
       return;
     }
 
-    // Start from the beginning for a consistent handoff from the intro video.
     try {
       el.currentTime = 0;
     } catch {
@@ -87,7 +87,7 @@ export default function Title({ data, playVideo = true }: TitleProps) {
         muted
         playsInline={true}
         preload="auto"
-        // We start playback via `playVideo` to align with the intro flow.
+        onCanPlayThrough={onVideoReady}
       >
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>

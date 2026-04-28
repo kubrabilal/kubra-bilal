@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import { Allura } from "next/font/google";
 import dynamic from "next/dynamic";
 import JsonData from "@/data.json";
 
@@ -15,8 +15,8 @@ const BackgroundMusic = dynamic(() => import("@/components/BackgroundMusic"), {
   ssr: false,
 });
 
-const cormorantGaramond = Cormorant_Garamond({
-  weight: ["400", "700"],
+const allura = Allura({
+  weight: "400",
   subsets: ["latin"],
   style: "normal",
 });
@@ -24,6 +24,7 @@ const cormorantGaramond = Cormorant_Garamond({
 export default function Home() {
   const [invitationVisible, setInvitationVisible] = useState(false);
   const [mediaEnabled, setMediaEnabled] = useState(false);
+  const [backgroundReady, setBackgroundReady] = useState(false);
 
   return (
     <>
@@ -52,25 +53,36 @@ export default function Home() {
         />
         <meta name="theme-color" content="#BCAAA4" />
         <title>Kübra & Bilal 26.07.2026</title>
+        <link rel="preload" href="./assets/giris.mp4" as="video" type="video/mp4" />
+        <link
+          rel="preload"
+          href="./assets/BackgroundVideo.mp4"
+          as="video"
+          type="video/mp4"
+        />
       </Head>
 
       <Envelope
         onInteract={() => setMediaEnabled(true)}
         onOpen={() => setInvitationVisible(true)}
+        backgroundReady={backgroundReady}
       />
 
       <BackgroundMusic enabled={mediaEnabled} />
 
       <main
-        className={cormorantGaramond.className}
+        className={allura.className}
         style={{
-          opacity: invitationVisible ? 1 : 0,
-          transition: "opacity 1.5s ease-in-out",
+          display: invitationVisible ? "block" : "none",
           pointerEvents: invitationVisible ? "auto" : "none",
           minHeight: "100vh",
         }}
       >
-        <Title data={JsonData} playVideo={mediaEnabled} />
+        <Title
+          data={JsonData}
+          playVideo={mediaEnabled}
+          onVideoReady={() => setBackgroundReady(true)}
+        />
         <Gretting data={JsonData} />
         <Gallery />
         <Location />

@@ -13,12 +13,6 @@ const Overlay = styled("div", {
   alignItems: "center",
   zIndex: 9999,
   backgroundColor: "#000",
-  transition: "opacity 700ms ease",
-  variants: {
-    hidden: {
-      true: { opacity: 0, pointerEvents: "none" },
-    },
-  },
 });
 
 const Cover = styled("button", {
@@ -58,6 +52,13 @@ const TapText = styled("div", {
   fontSize: "clamp(1.05rem, 2.7vw, 1.8rem)",
   letterSpacing: "0.02em",
   userSelect: "none",
+  variants: {
+    disabled: {
+      true: {
+        opacity: 0.8,
+      },
+    },
+  },
 });
 
 const IntroVideo = styled("video", {
@@ -72,13 +73,20 @@ const IntroVideo = styled("video", {
 type EnvelopeProps = {
   onOpen: () => void;
   onInteract?: () => void;
+  backgroundReady?: boolean;
 };
 
-export default function Envelope({ onOpen, onInteract }: EnvelopeProps) {
+export default function Envelope({
+  onOpen,
+  onInteract,
+  backgroundReady = false,
+}: EnvelopeProps) {
   const [phase, setPhase] = useState<Phase>("cover");
-  const [hidden, setHidden] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const introRef = useRef<HTMLVideoElement | null>(null);
   const didInteractRef = useRef(false);
+  const fullyReady = introReady && backgroundReady;
 
   const handleFirstInteraction = () => {
     if (didInteractRef.current) return;
@@ -87,6 +95,7 @@ export default function Envelope({ onOpen, onInteract }: EnvelopeProps) {
   };
 
   const startIntro = () => {
+    if (!fullyReady) return;
     handleFirstInteraction();
     setPhase("intro");
   };
@@ -108,31 +117,38 @@ export default function Envelope({ onOpen, onInteract }: EnvelopeProps) {
 
   const finish = () => {
     setPhase("exit");
-    setHidden(true);
-    // Let the fade finish before revealing the main site.
-    window.setTimeout(() => onOpen(), 720);
+    setIsDone(true);
+    onOpen();
   };
 
+  if (isDone) {
+    return null;
+  }
+
   return (
-    <Overlay hidden={hidden}>
+    <Overlay>
       {phase === "cover" && (
         <Cover type="button" onClick={startIntro} aria-label="Daveti aç">
           <CoverShade />
-          <TapText>Mektubu açmak için dokunun</TapText>
+          <TapText disabled={!fullyReady}>
+            Mektubu açmak için dokunun
+            {!fullyReady ? " (Yukleniyor...)" : ""}
+          </TapText>
         </Cover>
       )}
 
-      {phase === "intro" && (
-        <IntroVideo
-          ref={introRef}
-          playsInline
-          preload="auto"
-          onEnded={finish}
-          onClick={finish}
-        >
-          <source src="./assets/giris.mp4" type="video/mp4" />
-        </IntroVideo>
-      )}
+      <IntroVideo
+        ref={introRef}
+        playsInline
+        preload="auto"
+        onCanPlayThrough={() => setIntroReady(true)}
+        onEnded={finish}
+        onClick={finish}
+        style={{ visibility: phase === "intro" ? "visible" : "hidden" }}
+      >
+        <source src="./assets/giris.mp4" type="video/mp4" />
+      </IntroVideo>
+
     </Overlay>
   );
 }

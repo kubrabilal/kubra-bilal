@@ -48,13 +48,21 @@ const ElegantDivider = styled("div", {
   height: 1,
   margin: "0 auto 20px auto",
   background:
-    "linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.85), rgba(255,255,255,0))",
+    "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.9), rgba(0,0,0,0))",
 });
 
-const Schedule = styled("p", {
+const Schedule = styled("div", {
   fontSize: "2.9vh",
   opacity: 0.65,
   marginBottom: 24,
+});
+
+const MidDivider = styled("div", {
+  width: "min(220px, 52vw)",
+  height: 1,
+  margin: "10px auto 12px auto",
+  background:
+    "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.85), rgba(0,0,0,0))",
 });
 
 type TitleProps = {
@@ -116,7 +124,7 @@ export default function Title({
           <br />
           {data?.time}
           <br />
-          <br />
+          <MidDivider />
           {data?.location}
         </Schedule>
       </TitleWrapper>

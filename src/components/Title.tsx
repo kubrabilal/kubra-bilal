@@ -40,7 +40,15 @@ const Couple = styled("p", {
   fontSize: "6.8vh",
   fontWeight: "bold",
   opacity: 0.9,
-  marginBottom: 16,
+  marginBottom: 8,
+});
+
+const ElegantDivider = styled("div", {
+  width: "min(280px, 60vw)",
+  height: 1,
+  margin: "0 auto 20px auto",
+  background:
+    "linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.85), rgba(255,255,255,0))",
 });
 
 const Schedule = styled("p", {
@@ -102,10 +110,12 @@ export default function Title({
       </VideoBackground>
       <TitleWrapper>
         <Couple>{data?.couple}</Couple>
+        <ElegantDivider />
         <Schedule>
           {data?.date}
           <br />
           {data?.time}
+          <br />
           <br />
           {data?.location}
         </Schedule>

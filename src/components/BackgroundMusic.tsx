@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { styled } from "@stitches/react";
 import { SoundOutlined, SoundFilled, DownOutlined } from "@ant-design/icons";
 
@@ -65,6 +65,20 @@ export default function BackgroundMusic({ enabled }: BackgroundMusicProps) {
 
   const src = useMemo(() => "./assets/background music.mp3", []);
 
+  const ensurePlayback = useCallback(() => {
+    const el = audioRef.current;
+    if (!el || !enabled || muted) return;
+
+    if (el.paused) {
+      const maybePromise = el.play();
+      if (maybePromise && typeof maybePromise.catch === "function") {
+        maybePromise.catch(() => {
+          // iOS Safari can reject the first attempt; gesture listeners below retry.
+        });
+      }
+    }
+  }, [enabled, muted]);
+
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
@@ -79,9 +93,37 @@ export default function BackgroundMusic({ enabled }: BackgroundMusicProps) {
       return;
     }
 
-    // Must be triggered after user interaction; caller ensures `enabled` flips on click.
-    void el.play();
-  }, [enabled, muted]);
+    ensurePlayback();
+  }, [enabled, muted, ensurePlayback]);
+
+  useEffect(() => {
+    if (!enabled || muted) return;
+
+    // Retry playback from common gestures for iPhone/Safari reliability.
+    const events: Array<keyof WindowEventMap> = [
+      "touchstart",
+      "pointerdown",
+      "click",
+      "keydown",
+    ];
+    events.forEach((eventName) =>
+      window.addEventListener(eventName, ensurePlayback, { passive: true })
+    );
+    document.addEventListener("visibilitychange", ensurePlayback);
+
+    const el = audioRef.current;
+    el?.addEventListener("canplay", ensurePlayback);
+    el?.addEventListener("loadeddata", ensurePlayback);
+
+    return () => {
+      events.forEach((eventName) =>
+        window.removeEventListener(eventName, ensurePlayback)
+      );
+      document.removeEventListener("visibilitychange", ensurePlayback);
+      el?.removeEventListener("canplay", ensurePlayback);
+      el?.removeEventListener("loadeddata", ensurePlayback);
+    };
+  }, [enabled, muted, ensurePlayback]);
 
   if (!enabled) return null;
 

@@ -1,5 +1,5 @@
 import { styled } from "@stitches/react";
-import { Divider, Button } from "antd";
+import { Divider } from "antd";
 
 const Wrapper = styled("div", {
   background: "#f7f1e7",
@@ -49,31 +49,12 @@ export default function Location() {
       </a>
 
       <div style={{ marginTop: "15px" }}>
-        {/* 2. UPDATE THESE DETAILS for your Konya venue */}
         <p style={{ fontSize: "2.5vh", fontWeight: 700, color: "#444", marginBottom: "4px" }}>
           Tektaş Düğün Salonu
         </p>
         <p style={{ fontSize: "2.1vh", fontWeight: 700, color: "#666", marginBottom: "22px" }}>
           Karatay, Konya, Türkiye
         </p>
-        
-        {/* THE BUTTON (ALSO PRESENT JUST IN CASE) */}
-        <Button 
-          type="primary" 
-          size="large" 
-          onClick={() => window.open(mapUrl, "_blank")}
-          style={{ 
-            background: "#d4af37", 
-            borderColor: "#d4af37",
-            borderRadius: "4px",
-            height: "50px",
-            padding: "0 34px",
-            fontWeight: 700,
-            fontSize: "1rem"
-          }}
-        >
-          Konumu Google Haritalar&apos;da Aç
-        </Button>
       </div>
     </Wrapper>
   );

@@ -46,7 +46,6 @@ const FamilyName = styled("p", {
   opacity: 0.85,
   marginBottom: 8,
   margin: 0,
-  fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
   letterSpacing: "0.03em",
 });
 
@@ -59,7 +58,7 @@ const FamilyParents = styled("p", {
 
 const cormorantGaramond = Cormorant_Garamond({
   weight: ["500", "700"],
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   style: "normal",
 });
 

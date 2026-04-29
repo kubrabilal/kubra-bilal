@@ -32,6 +32,7 @@ const Content = styled("div", {
   width: "100%",
   maxWidth: "min(92vw, 760px)",
   padding: "0 10px",
+  whiteSpace: "normal",
   overflowWrap: "break-word",
   textAlign: "center",
 });
@@ -142,16 +143,7 @@ export default function Gretting({ data }: GrettingProps) {
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
         <Title>Davet Mesajı</Title>
       </Divider>
-      <Content>
-        {data?.gretting?.split("\n")?.map((value, index) => {
-          return (
-            <div key={index}>
-              {value}
-              <br />
-            </div>
-          );
-        })}
-      </Content>
+      <Content>{data?.gretting}</Content>
       <ElegantLine />
       <FamiliesContainer>
         <FamilySection>

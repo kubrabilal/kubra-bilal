@@ -25,7 +25,7 @@ const Title = styled("p", {
 });
 
 const Content = styled("div", {
-  fontSize: "3.4vh",
+  fontSize: "3.6vh",
   lineHeight: 1.75,
   opacity: 0.75,
   margin: "0 auto 14px auto",
@@ -175,7 +175,7 @@ export default function Gretting({ data }: GrettingProps) {
           <EventValue>Tektaş Düğün Salonu</EventValue>
         </EventRow>
         <EventRow>
-          <EventLabel>Gelin Alma Saati</EventLabel>
+          <EventLabel>Gelin Alma</EventLabel>
           <EventColon>:</EventColon>
           <EventValue>17:30</EventValue>
         </EventRow>

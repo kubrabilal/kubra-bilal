@@ -12,6 +12,7 @@ const marcellus = Marcellus({
 const Wrapper = styled("div", {
   backgroundColor: "#f6efe4",
   width: "100%",
+  paddingTop: 28,
   fontFamily: "'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 });
 
@@ -24,11 +25,14 @@ const Title = styled("p", {
 });
 
 const Content = styled("div", {
-  fontSize: "2.8vh",
-  lineHeight: 1.7,
+  fontSize: "3.4vh",
+  lineHeight: 1.75,
   opacity: 0.75,
-  marginBottom: 14,
+  margin: "0 auto 14px auto",
   width: "100%",
+  maxWidth: "min(92vw, 760px)",
+  padding: "0 10px",
+  overflowWrap: "break-word",
   textAlign: "center",
 });
 

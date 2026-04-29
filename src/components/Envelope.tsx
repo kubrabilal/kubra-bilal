@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { styled } from "@stitches/react";
 
 type Phase = "cover" | "intro" | "exit";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Overlay = styled("div", {
   position: "fixed",
@@ -22,7 +23,7 @@ const Cover = styled("button", {
   width: "100%",
   height: "100%",
   cursor: "pointer",
-  backgroundImage: `url("./assets/background.png")`,
+  backgroundImage: `url("${ASSET_BASE}/assets/background.png")`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -180,7 +181,7 @@ export default function Envelope({
         onClick={finish}
         style={{ visibility: phase === "intro" ? "visible" : "hidden" }}
       >
-        <source src="./assets/giris.mp4" type="video/mp4" />
+        <source src={`${ASSET_BASE}/assets/giris.mp4`} type="video/mp4" />
       </IntroVideo>
 
       {showWhiteTransition && <WhiteTransition />}

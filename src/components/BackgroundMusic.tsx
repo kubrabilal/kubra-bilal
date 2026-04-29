@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { styled } from "@stitches/react";
 import { SoundOutlined, SoundFilled, DownOutlined } from "@ant-design/icons";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Controls = styled("div", {
   position: "fixed",
@@ -63,7 +64,7 @@ export default function BackgroundMusic({ enabled }: BackgroundMusicProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [muted, setMuted] = useState(false);
 
-  const src = useMemo(() => "./assets/background music.mp3", []);
+  const src = useMemo(() => `${ASSET_BASE}/assets/background music.mp3`, []);
 
   const ensurePlayback = useCallback(() => {
     const el = audioRef.current;

@@ -2,10 +2,11 @@ import ImageGallery from "react-image-gallery";
 import { Divider } from "antd";
 import { styled } from "@stitches/react";
 import "react-image-gallery/styles/css/image-gallery.css";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Wrapper = styled("div", {
   background: "#f7f1e7",
-  backgroundImage: "url(./assets/GroovePaper.png)",
+  backgroundImage: `url(${ASSET_BASE}/assets/GroovePaper.png)`,
   width: "100%",
   maxWidth: "100%",
   overflowX: "hidden",
@@ -21,28 +22,28 @@ const Title = styled("p", {
 
 const images = [
   {
-    original: "./assets/Gallery_Photo_1.png",
-    thumbnail: "./assets/Gallery_Photo_1.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_1.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_1.png`,
   },
   {
-    original: "./assets/Gallery_Photo_2.png",
-    thumbnail: "./assets/Gallery_Photo_2.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_2.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_2.png`,
   },
   {
-    original: "./assets/Gallery_Photo_3.png",
-    thumbnail: "./assets/Gallery_Photo_3.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_3.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_3.png`,
   },
   {
-    original: "./assets/Gallery_Photo_4.png",
-    thumbnail: "./assets/Gallery_Photo_4.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_4.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_4.png`,
   },
   {
-    original: "./assets/Gallery_Photo_5.png",
-    thumbnail: "./assets/Gallery_Photo_5.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_5.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_5.png`,
   },
   {
-    original: "./assets/Gallery_Photo_6.png",
-    thumbnail: "./assets/Gallery_Photo_6.png",
+    original: `${ASSET_BASE}/assets/Gallery_Photo_6.png`,
+    thumbnail: `${ASSET_BASE}/assets/Gallery_Photo_6.png`,
   },
 ];
 

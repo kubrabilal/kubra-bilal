@@ -1,9 +1,10 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Wrapper = styled("div", {
   background: "#f7f1e7",
-  backgroundImage: "url(./assets/GroovePaper.png)",
+  backgroundImage: `url(${ASSET_BASE}/assets/GroovePaper.png)`,
   width: "100%",
   paddingBottom: 42,
   textAlign: "center",
@@ -43,7 +44,7 @@ export default function Location() {
       {/* MAKING THE IMAGE CLICKABLE */}
       <a href={mapUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-block' }}>
         <Image 
-          src="./assets/LocationMap.png" 
+          src={`${ASSET_BASE}/assets/LocationMap.png`} 
           alt="Wedding Venue Map" 
           style={{ cursor: 'pointer' }} 
         />

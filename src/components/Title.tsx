@@ -1,6 +1,7 @@
 import { styled } from "@stitches/react";
 import type { Data } from "@/types";
 import { useEffect, useRef, useState } from "react";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Layout = styled("div", {
   width: "100%",
@@ -120,7 +121,7 @@ export default function Title({
         onLoadedData={markReady}
         onCanPlayThrough={markReady}
       >
-        <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
+        <source src={`${ASSET_BASE}/assets/BackgroundVideo.mp4`} type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>
         <Couple>{data?.couple}</Couple>

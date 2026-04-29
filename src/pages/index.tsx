@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Allura } from "next/font/google";
 import dynamic from "next/dynamic";
 import JsonData from "@/data.json";
+const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const Envelope = dynamic(() => import("@/components/Envelope"), { ssr: false });
 
@@ -53,10 +54,15 @@ export default function Home() {
         />
         <meta name="theme-color" content="#BCAAA4" />
         <title>Kübra & Bilal 26.07.2026</title>
-        <link rel="preload" href="./assets/giris.mp4" as="video" type="video/mp4" />
         <link
           rel="preload"
-          href="./assets/BackgroundVideo.mp4"
+          href={`${ASSET_BASE}/assets/giris.mp4`}
+          as="video"
+          type="video/mp4"
+        />
+        <link
+          rel="preload"
+          href={`${ASSET_BASE}/assets/BackgroundVideo.mp4`}
           as="video"
           type="video/mp4"
         />

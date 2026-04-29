@@ -7,13 +7,16 @@ const Wrapper = styled("div", {
   background: "#f7f1e7",
   backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
+  maxWidth: "100%",
+  overflowX: "hidden",
 });
 
 const Title = styled("p", {
-  fontSize: "3vh",
+  fontSize: "4vh",
   fontWeight: "bold",
   opacity: 0.85,
-  marginBottom: 0,
+  margin: 0,
+  lineHeight: 1.1,
 });
 
 const images = [

@@ -11,10 +11,11 @@ const Wrapper = styled("div", {
 });
 
 const Title = styled("p", {
-  fontSize: "3.2vh",
+  fontSize: "4vh",
   fontWeight: 700,
   opacity: 0.85,
-  marginBottom: 0,
+  margin: 0,
+  lineHeight: 1.1,
 });
 
 const Image = styled("img", {
@@ -49,10 +50,10 @@ export default function Location() {
       </a>
 
       <div style={{ marginTop: "15px" }}>
-        <p style={{ fontSize: "2.5vh", fontWeight: 700, color: "#444", marginBottom: "4px" }}>
+        <p style={{ fontSize: "3.2vh", fontWeight: 700, color: "#444", marginBottom: "6px" }}>
           Tektaş Düğün Salonu
         </p>
-        <p style={{ fontSize: "2.1vh", fontWeight: 700, color: "#666", marginBottom: "22px" }}>
+        <p style={{ fontSize: "2.7vh", fontWeight: 700, color: "#666", marginBottom: "22px" }}>
           Karatay, Konya, Türkiye
         </p>
       </div>

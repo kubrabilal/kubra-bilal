@@ -1,22 +1,39 @@
 import { useState, useEffect } from "react";
 import { styled } from "@stitches/react";
+import { Marcellus } from "next/font/google";
+
+const marcellus = Marcellus({
+  weight: "400",
+  subsets: ["latin", "latin-ext"],
+  style: "normal",
+});
 
 const TimerWrapper = styled("div", {
   backgroundColor: "#f6efe4",
   width: "100%",
   marginTop: "-1px",
-  padding: "52px 0",
+  padding: "57px 0",
   textAlign: "center",
 });
 
 const TimeUnit = styled("div", {
-  display: "inline-block",
-  margin: "0 10px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   textAlign: "center",
 });
 
+const UnitsRow = styled("div", {
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  width: "100%",
+  gap: "18px 16px",
+});
+
 const Number = styled("div", {
-  fontSize: "4.5vh",
+  fontSize: "4.7vh",
   fontWeight: "bold",
   color: "#d4af37", // Matching your map button gold
 });
@@ -27,7 +44,7 @@ const Label = styled("div", {
   letterSpacing: "1.2px",
   color: "#777",
   fontWeight: "700",
-  fontFamily: "'Montserrat', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
+  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif`,
 });
 
 export default function WeddingTimer() {
@@ -68,8 +85,8 @@ export default function WeddingTimer() {
     <TimerWrapper>
       <div
         style={{
-          marginBottom: "26px",
-          fontSize: "3.8vh",
+          marginBottom: "31px",
+          fontSize: "4.7vh",
           color: "#555",
           fontStyle: "italic",
           fontWeight: 700,
@@ -77,7 +94,7 @@ export default function WeddingTimer() {
       >
         Düğünümüze kalan süre...
       </div>
-      <div>
+      <UnitsRow>
         <TimeUnit>
           <Number>{timeLeft.months}</Number>
           <Label>Ay</Label>
@@ -92,13 +109,13 @@ export default function WeddingTimer() {
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.minutes}</Number>
-          <Label>Dakika</Label>
+          <Label>DAKİKA</Label>
         </TimeUnit>
         <TimeUnit>
           <Number>{timeLeft.seconds}</Number>
-          <Label>Saniye</Label>
+          <Label>SANİYE</Label>
         </TimeUnit>
-      </div>
+      </UnitsRow>
     </TimerWrapper>
   );
 }

@@ -45,13 +45,15 @@ const TapText = styled("div", {
   marginBottom: "min(12vh, 110px)",
   padding: "0.9rem 1.1rem",
   borderRadius: 16,
-  backgroundColor: "rgba(0,0,0,0.35)",
-  backdropFilter: "blur(6px)",
+  backgroundColor: "transparent",
+  backdropFilter: "none",
   textAlign: "center",
-  color: "#fff",
-  fontSize: "clamp(1.05rem, 2.7vw, 1.8rem)",
+  color: "#000",
+  fontSize: "clamp(2.25rem, 6.8vw, 4.6rem)",
+  fontWeight: 800,
   letterSpacing: "0.02em",
   userSelect: "none",
+  textShadow: "0 0 0 rgba(0,0,0,0)",
   variants: {
     disabled: {
       true: {
@@ -163,7 +165,7 @@ export default function Envelope({
         <Cover type="button" onClick={startIntro} aria-label="Daveti aç">
           <CoverShade />
           <TapText disabled={!allowStart}>
-            Mektubu açmak için dokunun
+            Açmak için dokunun.
             {!allowStart ? " (Yukleniyor...)" : ""}
           </TapText>
         </Cover>

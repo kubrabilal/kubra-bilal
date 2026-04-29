@@ -1,6 +1,6 @@
 import { styled } from "@stitches/react";
 import type { Data } from "@/types";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Layout = styled("div", {
   width: "100%",
@@ -37,7 +37,7 @@ const WeddingInvitation = styled("p", {
 });
 
 const Couple = styled("p", {
-  fontSize: "6.8vh",
+  fontSize: "7.6vh",
   fontWeight: "bold",
   opacity: 0.9,
   marginBottom: 8,
@@ -48,11 +48,11 @@ const ElegantDivider = styled("div", {
   height: 1,
   margin: "0 auto 20px auto",
   background:
-    "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.9), rgba(0,0,0,0))",
+    "linear-gradient(to right, rgba(212,175,55,0), rgba(212,175,55,0.95), rgba(212,175,55,0))",
 });
 
 const Schedule = styled("div", {
-  fontSize: "2.9vh",
+  fontSize: "3.2vh",
   opacity: 0.65,
   marginBottom: 24,
 });
@@ -62,7 +62,7 @@ const MidDivider = styled("div", {
   height: 1,
   margin: "10px auto 12px auto",
   background:
-    "linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.85), rgba(0,0,0,0))",
+    "linear-gradient(to right, rgba(212,175,55,0), rgba(212,175,55,0.9), rgba(212,175,55,0))",
 });
 
 type TitleProps = {
@@ -78,6 +78,7 @@ export default function Title({
 }: TitleProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const readyFiredRef = useRef(false);
+  const [showDividers, setShowDividers] = useState(false);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -95,6 +96,11 @@ export default function Title({
     }
     void el.play();
   }, [playVideo]);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setShowDividers(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const markReady = () => {
     if (readyFiredRef.current) return;
@@ -118,13 +124,23 @@ export default function Title({
       </VideoBackground>
       <TitleWrapper>
         <Couple>{data?.couple}</Couple>
-        <ElegantDivider />
+        <ElegantDivider
+          style={{
+            opacity: showDividers ? 1 : 0,
+            transition: "opacity 3s ease",
+          }}
+        />
         <Schedule>
           {data?.date}
           <br />
           {data?.time}
           <br />
-          <MidDivider />
+          <MidDivider
+            style={{
+              opacity: showDividers ? 1 : 0,
+              transition: "opacity 3s ease",
+            }}
+          />
           {data?.location}
         </Schedule>
       </TitleWrapper>

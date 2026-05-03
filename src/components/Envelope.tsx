@@ -89,12 +89,15 @@ const WhiteTransition = styled("div", {
 type EnvelopeProps = {
   onOpen: () => void;
   onInteract?: () => void;
+  /** Fires when the intro video begins (after the user taps to open). */
+  onIntroStart?: () => void;
   backgroundReady?: boolean;
 };
 
 export default function Envelope({
   onOpen,
   onInteract,
+  onIntroStart,
   backgroundReady = false,
 }: EnvelopeProps) {
   const [phase, setPhase] = useState<Phase>("cover");
@@ -115,6 +118,7 @@ export default function Envelope({
   const startIntro = () => {
     if (!allowStart) return;
     handleFirstInteraction();
+    onIntroStart?.();
     setPhase("intro");
   };
 

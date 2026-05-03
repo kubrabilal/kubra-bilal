@@ -1,9 +1,13 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Allura } from "next/font/google";
 import dynamic from "next/dynamic";
 import JsonData from "@/data.json";
+import ScrollHint from "@/components/ScrollHint";
 const ASSET_BASE = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+const SCROLL_HINT_DELAY_MS = 2800;
+const SCROLL_HINT_DISMISS_PX = 40;
 
 const Envelope = dynamic(() => import("@/components/Envelope"), { ssr: false });
 
@@ -26,6 +30,65 @@ export default function Home() {
   const [invitationVisible, setInvitationVisible] = useState(false);
   const [mediaEnabled, setMediaEnabled] = useState(false);
   const [backgroundReady, setBackgroundReady] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(false);
+
+  const invitationVisibleRef = useRef(false);
+  const pendingScrollHintRef = useRef(false);
+  const scrollHintDismissedRef = useRef(false);
+  const hintTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    invitationVisibleRef.current = invitationVisible;
+  }, [invitationVisible]);
+
+  const onIntroStart = useCallback(() => {
+    if (hintTimerRef.current) {
+      clearTimeout(hintTimerRef.current);
+      hintTimerRef.current = null;
+    }
+    hintTimerRef.current = window.setTimeout(() => {
+      hintTimerRef.current = null;
+      if (scrollHintDismissedRef.current) return;
+      if (invitationVisibleRef.current) {
+        setShowScrollHint(true);
+      } else {
+        pendingScrollHintRef.current = true;
+      }
+    }, SCROLL_HINT_DELAY_MS) as unknown as number;
+  }, []);
+
+  useEffect(() => {
+    if (!invitationVisible) return;
+
+    if (!scrollHintDismissedRef.current && pendingScrollHintRef.current) {
+      pendingScrollHintRef.current = false;
+      setShowScrollHint(true);
+    }
+
+    if (window.scrollY > SCROLL_HINT_DISMISS_PX) {
+      scrollHintDismissedRef.current = true;
+      pendingScrollHintRef.current = false;
+      setShowScrollHint(false);
+      if (hintTimerRef.current) {
+        clearTimeout(hintTimerRef.current);
+        hintTimerRef.current = null;
+      }
+    }
+
+    const onScroll = () => {
+      if (window.scrollY <= SCROLL_HINT_DISMISS_PX) return;
+      scrollHintDismissedRef.current = true;
+      pendingScrollHintRef.current = false;
+      setShowScrollHint(false);
+      if (hintTimerRef.current) {
+        clearTimeout(hintTimerRef.current);
+        hintTimerRef.current = null;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [invitationVisible]);
 
   return (
     <>
@@ -70,6 +133,7 @@ export default function Home() {
 
       <Envelope
         onInteract={() => setMediaEnabled(true)}
+        onIntroStart={onIntroStart}
         onOpen={() => setInvitationVisible(true)}
         backgroundReady={backgroundReady}
       />
@@ -93,6 +157,7 @@ export default function Home() {
         <WeddingTimer />
         <Location />
         <Gallery />
+        {showScrollHint ? <ScrollHint /> : null}
       </main>
     </>
   );

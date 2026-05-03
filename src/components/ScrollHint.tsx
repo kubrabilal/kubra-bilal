@@ -7,7 +7,7 @@ const Outer = styled("div", {
   position: "fixed",
   left: 0,
   right: 0,
-  bottom: "max(28px, env(safe-area-inset-bottom, 0px))",
+  bottom: "calc(max(28px, env(safe-area-inset-bottom, 0px)) + 16px)",
   zIndex: 100,
   display: "flex",
   flexDirection: "column",
@@ -44,7 +44,7 @@ const Label = styled("p", {
   padding: "0 16px",
   textAlign: "center",
   fontSize: "clamp(1.45rem, 4.8vw, 2.15rem)",
-  fontWeight: 600,
+  fontWeight: 700,
   letterSpacing: "0.055em",
   color: CHARCOAL,
   textShadow:
@@ -53,7 +53,7 @@ const Label = styled("p", {
 
 const Chevron = styled("span", {
   display: "block",
-  marginTop: "10px",
+  marginTop: "20px",
   fontSize: "clamp(1.15rem, 3.6vw, 1.6rem)",
   lineHeight: 1,
   color: CHARCOAL,

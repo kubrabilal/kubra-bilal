@@ -156,6 +156,12 @@ export default function Title({
             }}
           />
           {data?.location}
+          {data?.locationSubline ? (
+            <>
+              <br />
+              {data.locationSubline}
+            </>
+          ) : null}
         </Schedule>
       </TitleWrapper>
     </Layout>

@@ -1,7 +1,13 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
-import { Marcellus } from "next/font/google";
+import { Allura, Marcellus } from "next/font/google";
 import type { Data } from "@/types";
+
+const allura = Allura({
+  weight: "400",
+  subsets: ["latin"],
+  style: "normal",
+});
 
 const marcellus = Marcellus({
   weight: "400",
@@ -88,12 +94,14 @@ const FamilyPhone = styled("p", {
   letterSpacing: "0.02em",
 });
 
+const eventScheduleFont = `${allura.style.fontFamily}, cursive`;
+
 const EventDetails = styled("div", {
   fontSize: "2vh",
   lineHeight: 1.6,
   opacity: 0.85,
   paddingBottom: 11,
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif`,
+  fontFamily: eventScheduleFont,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -107,7 +115,7 @@ const EventRow = styled("div", {
   columnGap: 0,
   alignItems: "baseline",
   width: "100%",
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif`,
+  fontFamily: eventScheduleFont,
   "@media (max-width: 480px)": {
     gridTemplateColumns: "150px 9px 1fr",
   },
@@ -115,17 +123,17 @@ const EventRow = styled("div", {
 
 const EventLabel = styled("span", {
   fontWeight: 700,
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif !important`,
+  fontFamily: `${eventScheduleFont} !important`,
   justifySelf: "end",
 });
 
 const EventColon = styled("span", {
   justifySelf: "center",
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif !important`,
+  fontFamily: `${eventScheduleFont} !important`,
 });
 
 const EventValue = styled("span", {
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif !important`,
+  fontFamily: `${eventScheduleFont} !important`,
   justifySelf: "start",
   textAlign: "left",
   whiteSpace: "nowrap",
@@ -134,7 +142,7 @@ const EventValue = styled("span", {
 });
 
 const EventValueStack = styled("span", {
-  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif !important`,
+  fontFamily: `${eventScheduleFont} !important`,
   justifySelf: "start",
   textAlign: "left",
   display: "flex",
@@ -183,8 +191,10 @@ export default function Gretting({ data }: GrettingProps) {
           <EventLabel>Yer</EventLabel>
           <EventColon>:</EventColon>
           <EventValueStack>
-            <span>Tektaş Düğün Salonu</span>
-            <span>Gümüş Koza</span>
+            <span>{data?.location}</span>
+            {data?.locationSubline ? (
+              <span>{data.locationSubline}</span>
+            ) : null}
           </EventValueStack>
         </EventRow>
         <EventRow>

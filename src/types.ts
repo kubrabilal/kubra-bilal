@@ -3,6 +3,7 @@ export type Data = {
   date: string;
   time: string;
   location: string;
+  locationSubline: string;
   gretting: string;
   families: {
     left: {

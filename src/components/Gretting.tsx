@@ -149,6 +149,8 @@ const EventValueStack = styled("span", {
   flexDirection: "column",
   alignItems: "flex-start",
   lineHeight: 1.6,
+  overflowWrap: "break-word",
+  wordBreak: "break-word",
 });
 
 type GrettingProps = {
@@ -201,6 +203,13 @@ export default function Gretting({ data }: GrettingProps) {
           <EventLabel>Gelin Alma</EventLabel>
           <EventColon>:</EventColon>
           <EventValue>17:30</EventValue>
+        </EventRow>
+        <EventRow>
+          <EventLabel>Adres</EventLabel>
+          <EventColon>:</EventColon>
+          <EventValueStack>
+            <span>{data?.address}</span>
+          </EventValueStack>
         </EventRow>
       </EventDetails>
     </Wrapper>

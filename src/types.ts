@@ -4,6 +4,7 @@ export type Data = {
   time: string;
   location: string;
   locationSubline: string;
+  address: string;
   gretting: string;
   families: {
     left: {

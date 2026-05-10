@@ -147,6 +147,12 @@ const EventValueStack = styled("span", {
   wordBreak: "break-word",
 });
 
+/** Beats `* { font-family: Allura }` in globals.css — plain `<span>` does not. */
+const EventStackLine = styled("span", {
+  display: "block",
+  fontFamily: `${eventScheduleFont} !important`,
+});
+
 type GrettingProps = {
   data?: Data;
 };
@@ -187,9 +193,9 @@ export default function Gretting({ data }: GrettingProps) {
           <EventLabel>Yer</EventLabel>
           <EventColon>:</EventColon>
           <EventValueStack>
-            <span>{data?.location}</span>
+            <EventStackLine>{data?.location}</EventStackLine>
             {data?.locationSubline ? (
-              <span>{data.locationSubline}</span>
+              <EventStackLine>{data.locationSubline}</EventStackLine>
             ) : null}
           </EventValueStack>
         </EventRow>
@@ -202,7 +208,7 @@ export default function Gretting({ data }: GrettingProps) {
           <EventLabel>Adres</EventLabel>
           <EventColon>:</EventColon>
           <EventValueStack>
-            <span>{data?.address}</span>
+            <EventStackLine>{data?.address}</EventStackLine>
           </EventValueStack>
         </EventRow>
       </EventDetails>

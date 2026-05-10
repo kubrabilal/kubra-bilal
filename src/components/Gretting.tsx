@@ -133,6 +133,16 @@ const EventValue = styled("span", {
   textOverflow: "ellipsis",
 });
 
+const EventValueStack = styled("span", {
+  fontFamily: `${marcellus.style.fontFamily}, 'Times New Roman', serif !important`,
+  justifySelf: "start",
+  textAlign: "left",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  lineHeight: 1.6,
+});
+
 type GrettingProps = {
   data?: Data;
 };
@@ -172,7 +182,10 @@ export default function Gretting({ data }: GrettingProps) {
         <EventRow>
           <EventLabel>Yer</EventLabel>
           <EventColon>:</EventColon>
-          <EventValue>Tektaş Düğün Salonu</EventValue>
+          <EventValueStack>
+            <span>Tektaş Düğün Salonu</span>
+            <span>Gümüş Koza</span>
+          </EventValueStack>
         </EventRow>
         <EventRow>
           <EventLabel>Gelin Alma</EventLabel>

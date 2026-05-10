@@ -56,6 +56,19 @@ const Schedule = styled("div", {
   fontSize: "3.2vh",
   opacity: 0.65,
   marginBottom: 24,
+  maxWidth: "min(92vw, 520px)",
+  marginLeft: "auto",
+  marginRight: "auto",
+  paddingLeft: "max(12px, env(safe-area-inset-left))",
+  paddingRight: "max(12px, env(safe-area-inset-right))",
+  boxSizing: "border-box",
+  lineHeight: 1.45,
+  overflowWrap: "break-word",
+  wordBreak: "break-word",
+  "@media (max-width: 480px)": {
+    fontSize: "2.75vh",
+    maxWidth: "min(96vw, 520px)",
+  },
 });
 
 const MidDivider = styled("div", {

@@ -49,15 +49,6 @@ export default function Location() {
           style={{ cursor: 'pointer' }} 
         />
       </a>
-
-      <div style={{ marginTop: "15px" }}>
-        <p style={{ fontSize: "3.2vh", fontWeight: 700, color: "#444", marginBottom: "6px" }}>
-          Tektaş Düğün Salonu
-        </p>
-        <p style={{ fontSize: "2.7vh", fontWeight: 700, color: "#666", marginBottom: "22px" }}>
-          Karatay, Konya, Türkiye
-        </p>
-      </div>
     </Wrapper>
   );
 }

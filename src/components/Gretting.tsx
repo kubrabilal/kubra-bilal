@@ -1,13 +1,7 @@
 import { styled } from "@stitches/react";
 import { Divider } from "antd";
-import { Allura, Marcellus } from "next/font/google";
+import { Marcellus } from "next/font/google";
 import type { Data } from "@/types";
-
-const allura = Allura({
-  weight: "400",
-  subsets: ["latin"],
-  style: "normal",
-});
 
 const marcellus = Marcellus({
   weight: "400",
@@ -94,7 +88,7 @@ const FamilyPhone = styled("p", {
   letterSpacing: "0.02em",
 });
 
-const eventScheduleFont = `${allura.style.fontFamily}, cursive`;
+const eventScheduleFont = `${marcellus.style.fontFamily}, 'Times New Roman', serif`;
 
 const EventDetails = styled("div", {
   fontSize: "2vh",

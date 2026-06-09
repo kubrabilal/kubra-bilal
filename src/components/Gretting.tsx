@@ -202,7 +202,7 @@ export default function Gretting({ data }: GrettingProps) {
         <EventRow>
           <EventLabel>Gelin Alma</EventLabel>
           <EventColon>:</EventColon>
-          <EventValue>17:30</EventValue>
+          <EventValue>18:00</EventValue>
         </EventRow>
         <EventRow>
           <EventLabel>Adres</EventLabel>
